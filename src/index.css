@@ -127,3 +127,15 @@ footer{
 	border: 0.1rem #808080 solid;
 }
 
+
+.filter{
+	display: flex;
+	border-bottom: 00.1rem #c0c0c0 solid;
+	margin: 1rem;
+	padding: 1rem;
+	justify-content: space-between;
+}
+
+.filter div{
+	flex: 1;
+}
