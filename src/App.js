@@ -2,7 +2,9 @@ import React from 'react';
 import { products } from './data.json';
 import Products from './Components/Products';
 import Filter from './Components/Filter';
-import Cart from './Components/Cart'
+import Cart from './Components/Cart';
+import Store from './Store';
+import {Provider} from 'react-redux';
 
 class App extends React.Component {
 
@@ -85,30 +87,33 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="grid-container">
-        <header>
-          <a href='/'>React Shopping App</a>
-        </header>
-        <main>
-          <div className="content">
-            <div className="main">
-              <Filter count={this.state.products.length} size={this.state.size} sort={this.state.sort}
-              filterProducts={this.filterProducts}
-              sortProducts={this.sortProducts}/>
+      <Provider store={Store}>
 
-              <Products products={this.state.products} addToCart={this.addToCart} />
+        <div className="grid-container">
+          <header>
+            <a href='/'>React Shopping App</a>
+          </header>
+          <main>
+            <div className="content">
+              <div className="main">
+                <Filter count={this.state.products.length} size={this.state.size} sort={this.state.sort}
+                filterProducts={this.filterProducts}
+                sortProducts={this.sortProducts}/>
+
+                <Products  addToCart={this.addToCart} />
+              </div>
+              <div className="sidebar">
+                <Cart cartItems={this.state.cartItems}
+                removeFromCart={this.removeFromCart}
+                createOrder={this.createOrder} />
+              </div>
             </div>
-            <div className="sidebar">
-              <Cart cartItems={this.state.cartItems}
-               removeFromCart={this.removeFromCart}
-               createOrder={this.createOrder} />
-            </div>
-          </div>
-        </main>
-        <footer>
-          All Rights' reserved
-        </footer>
-      </div>
+          </main>
+          <footer>
+            All Rights' reserved
+          </footer>
+        </div>
+      </Provider>
     );
   }
 
